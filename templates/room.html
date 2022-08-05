@@ -1,21 +1,17 @@
-<!DOCTYPE html>
-<html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>SLS DUBAI</title>
+{% extends 'base.html' %}
 
-        <link rel="stylesheet" href="static/css/bootstrap.css">
-    </head>
-
-    <body >
+{% block body %}
+ 
         <header>
             <div class="logo">
                 <img src="static/images/lgo sls.jpeg" alt="">
         
             </div>
   
+            <a href="/" >
+              <span class="badge bg-primary">Inicio</span>
+            </a>
+
         </header>
 
         <nav>
@@ -85,8 +81,5 @@
           </div>
         </div>
         
-        
-        
-    </body>
-    <script src="static/js/script.js"></script>
-</html>
+
+  {% endblock %}

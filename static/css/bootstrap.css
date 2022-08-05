@@ -87,8 +87,14 @@ header {
   padding-bottom: 0px;
 }
 
-header div {
+header div,  header a {
   display: inline-block;
+}
+
+header a {
+  float: right;
+  margin-top: 20px;
+  margin-right: 10%;
 }
 
 header .logo {
@@ -157,9 +163,6 @@ margin-left: 40%;
 .Card{
   height: 200px;
   width: 200px;
-
-
-
   line-height: 100px;
   text-align: center;
   vertical-align: middle;
@@ -184,20 +187,37 @@ margin-left: 40%;
    margin-left: 35%;
 }
 
-.i1{
+.i1, .i2, .i3{
   display: inline-block;
-   margin-left: 10%;
+   margin-left: 20%;
 }
 
-.i2{
-  display: inline-block;
-   margin-left: 25%;
+
+
+#formulario_crear {
+  width: 50%;
+  margin-top: -10%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.i3{
-  display: inline-block;
-   margin-left: -20%;
+#formulario_crear input {
+  margin-top: 5px;
 }
+
+
+#btn_crear , #cancelar_usuario {
+  margin-top: 5px;
+}
+
+#btn_crear {
+  float: right;
+}
+
+
+
+--------------------------------------------------------------------------------------
+
 *,
 *::before,
 *::after {

@@ -1,0 +1,26 @@
+{% extends 'user_main.html' %}
+
+{% block contenido %}
+
+<div id="formulario_crear">
+
+  <h5>Datos nuevo usuario</h5>
+
+  <form action="/user_registrarse" method="post" class="form">
+      <input class="form-control" type="number" name="cedula" id="cedula" placeholder="Cedula">
+      <input class="form-control" type="text" name="nombre" id="nombre" placeholder="Nombre">
+      <input class="form-control" type="text" name="apellido" id="apellido" placeholder="Apellido">
+      <input class="form-control" type="email" name="correo" id="correo" placeholder="Correo">
+      <input class="form-control" type="number" name="celular" id="celular" placeholder="Celular">
+      <input class="form-control" type="text" name="direccion" id="direccion" placeholder="Dirección">
+      <input class="form-control"type="date" name="fecha_nacimiento" id="fecha_nacimiento" placeholder="Fecha de nacimiento">
+      <button class="btn btn-dark" type="submit" name="accion" id="btn_crear" value="Crear Usuario">Crear Usuario</button>
+      <button class="btn btn-danger" type="submit" name="accion" id="cancelar_usuario"  value="cancelar" >Cancelar</button>
+  </form>
+
+
+
+</div>    
+
+       
+{% endblock %}
