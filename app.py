@@ -1,12 +1,11 @@
 import os
 from flask import Flask, redirect, render_template, request, jsonify
-
+import db.scripts as scripts
 
 
 app = Flask(__name__)
 
 app.secret_key = os.urandom(24)
-
 
 @app.route('/', methods=['GET','POST'])
 def inicio():
@@ -40,17 +39,16 @@ def room():
     else: 
          return redirect('/')
 
-@app.route('/user_registrarse', methods=['GET','POST'])
+@app.route('/user_registrarse')
 def registrarse():
-    if request.method == 'GET': 
-        return render_template( 'user_registrarse.html')
-    else:
-        if request.form.get('accion')== 'cancelar':
-            return redirect('/')
-        elif request.form.get('accion')=='Crear Usuario':
-            usuario = request.form.to_dict(flat=False)
-            return jsonify(usuario)
-        else:   
-            return redirect('/')
+    return render_template( 'user_registrarse.html')
+
+
+@app.route('/crear', methods=['POST'])
+def crear():
+    usuario = request.form.to_dict(flat=True)
+    usuario.pop("Pasword_confirmacion")
+    scripts.insertar_usuario(usuario)
+    return redirect('/user')
 
 

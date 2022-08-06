@@ -6,21 +6,45 @@
 
   <h5>Datos nuevo usuario</h5>
 
-  <form action="/user_registrarse" method="post" class="form">
-      <input class="form-control" type="number" name="cedula" id="cedula" placeholder="Cedula">
+  <form action="/crear" method="post"  >
+      <input class="form-control" type="text" name="usuario" id="usuario" placeholder="Usuario">
       <input class="form-control" type="text" name="nombre" id="nombre" placeholder="Nombre">
       <input class="form-control" type="text" name="apellido" id="apellido" placeholder="Apellido">
       <input class="form-control" type="email" name="correo" id="correo" placeholder="Correo">
       <input class="form-control" type="number" name="celular" id="celular" placeholder="Celular">
       <input class="form-control" type="text" name="direccion" id="direccion" placeholder="Dirección">
       <input class="form-control"type="date" name="fecha_nacimiento" id="fecha_nacimiento" placeholder="Fecha de nacimiento">
-      <button class="btn btn-dark" type="submit" name="accion" id="btn_crear" value="Crear Usuario">Crear Usuario</button>
-      <button class="btn btn-danger" type="submit" name="accion" id="cancelar_usuario"  value="cancelar" >Cancelar</button>
+      <input class="form-control"type="text" name="pasword" id="pasword" placeholder="Pasword">
+      <input class="form-control"type="text" name="Pasword_confirmacion" id="Pasword_confirmacion" >
+      <button class="btn btn-dark" type="submit" name="accion" id="btn_crear" value="Crear Usuario" onclick="return alerta_crear()">Crear Usuario</button>      
   </form>
-
-
+  
+    <a href="/user" >
+        <button class="btn btn-danger" id="cancelar_usuario"  >Cancelar</button>
+    </a>
 
 </div>    
+
+
+<button data-bs-toggle="modal" data-bs-target="#exampleModal" id="abrir_modal" hidden>
+  Abrir Modal
+</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Error</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="cerrar_modal"></button>
+      </div>
+      <div class="modal-body" id="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
 
        
 {% endblock %}
