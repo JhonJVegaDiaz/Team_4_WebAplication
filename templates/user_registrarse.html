@@ -6,7 +6,7 @@
 
   <h5>Datos nuevo usuario</h5>
 
-  <form action="/crear" method="post"  >
+  <form action="/crear" method="post" onsubmit="return alerta_crear()" >
       <input class="form-control" type="text" name="usuario" id="usuario" placeholder="Usuario">
       <input class="form-control" type="text" name="nombre" id="nombre" placeholder="Nombre">
       <input class="form-control" type="text" name="apellido" id="apellido" placeholder="Apellido">
@@ -15,8 +15,8 @@
       <input class="form-control" type="text" name="direccion" id="direccion" placeholder="Dirección">
       <input class="form-control"type="date" name="fecha_nacimiento" id="fecha_nacimiento" placeholder="Fecha de nacimiento">
       <input class="form-control"type="text" name="pasword" id="pasword" placeholder="Pasword">
-      <input class="form-control"type="text" name="Pasword_confirmacion" id="Pasword_confirmacion" >
-      <button class="btn btn-dark" type="submit" name="accion" id="btn_crear" value="Crear Usuario" onclick="return alerta_crear()">Crear Usuario</button>      
+      <input class="form-control"type="text" name="Pasword_confirmacion" id="Pasword_confirmacion" placeholder="Confirmación del pasword">
+      <input class="btn btn-dark" type="submit" name="accion" id="btn_crear" value="Crear Usuario">     
   </form>
   
     <a href="/user" >

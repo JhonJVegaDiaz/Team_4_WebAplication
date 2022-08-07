@@ -12,7 +12,7 @@ def insertar_usuario(usuario):
                                                 usuario['nombre'], 
                                                 usuario['apellido'], usuario['correo'], 
                                                 usuario['celular'], usuario['direccion'],
-                                                usuario['fecha_nacimiento'], usuario['fecha_nacimiento'])
+                                                usuario['fecha_nacimiento'], usuario['pasword'])
 
     conexion = conexion_bd()
     cursor = conexion.cursor()
