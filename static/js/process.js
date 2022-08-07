@@ -16,6 +16,8 @@ function alerta_crear() {
     
 
     if (!usuario) {texto_modal.textContent = "Escriba un usuario"; abrir_modal.click(); return false }
+    
+
     if (!contraseña) {texto_modal.textContent = "Escriba una contraseña"; abrir_modal.click(); return false }
     if (!confirmar_contraseña) {texto_modal.textContent = "Confirme la contraseña"; abrir_modal.click(); return false }
 

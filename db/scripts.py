@@ -8,7 +8,7 @@ def conexion_bd():
         print('Error de conexion bd')
 
 def insertar_usuario(usuario):
-    query = "insert into usuarios (usuario, nombre, apellido, correo, celular, direccion, fecha, pasword) values ('{}','{}','{}','{}','{}','{}','{}','{}');".format(usuario['usuario'],
+    query = "insert into usuarios (usuario, nombre, apellido, correo, celular, direccion, fecha, pasword, super) values ('{}','{}','{}','{}','{}','{}','{}','{}', 0);".format(usuario['usuario'],
                                                 usuario['nombre'], 
                                                 usuario['apellido'], usuario['correo'], 
                                                 usuario['celular'], usuario['direccion'],
