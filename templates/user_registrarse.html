@@ -1,6 +1,10 @@
 {% extends 'user_main.html' %}
 
-{% block contenido %}
+{% block src %} 
+<link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.css')}}" />
+{% endblock %}
+
+{% block body_user %}
 
 <div id="formulario_crear">
 
@@ -14,6 +18,8 @@
       <input class="form-control" type="number" name="celular" id="celular" placeholder="Celular">
       <input class="form-control" type="text" name="direccion" id="direccion" placeholder="Dirección">
       <input class="form-control"type="date" name="fecha_nacimiento" id="fecha_nacimiento" placeholder="Fecha de nacimiento">
+      <input class="form-control"type="text" name="pregunta" id="pregunta" placeholder="Pregunta de recuperación">
+      <input class="form-control"type="text" name="respuesta" id="respuesta" placeholder="Respuesta">
       <input class="form-control"type="text" name="pasword" id="pasword" placeholder="Pasword">
       <input class="form-control"type="text" name="Pasword_confirmacion" id="Pasword_confirmacion" placeholder="Confirmación del pasword">
       <input class="btn btn-dark" type="submit" name="accion" id="btn_crear" value="Crear Usuario">     
@@ -47,4 +53,8 @@
 </div>
 
        
+{% endblock %}
+
+{% block script %}
+    <script src="static/js/bootstrap.js"></script> 
 {% endblock %}

@@ -1,3 +1,4 @@
+from cmath import log
 import sqlite3
 
 def conexion_bd():
@@ -8,11 +9,12 @@ def conexion_bd():
         print('Error de conexion bd')
 
 def insertar_usuario(usuario):
-    query = "insert into usuarios (usuario, nombre, apellido, correo, celular, direccion, fecha, pasword, super) values ('{}','{}','{}','{}','{}','{}','{}','{}', 0);".format(usuario['usuario'],
+    query = "insert into usuarios (usuario, nombre, apellido, correo, celular, direccion, fecha, pasword, super, pregunta, respuesta) values ('{}','{}','{}','{}','{}','{}','{}','{}', 0,'{}','{}');".format(usuario['usuario'],
                                                 usuario['nombre'], 
                                                 usuario['apellido'], usuario['correo'], 
                                                 usuario['celular'], usuario['direccion'],
-                                                usuario['fecha_nacimiento'], usuario['pasword'])
+                                                usuario['fecha_nacimiento'], usuario['pasword'],
+                                                usuario['pregunta'], usuario['respuesta'])
 
     conexion = conexion_bd()
     cursor = conexion.cursor()
@@ -61,3 +63,15 @@ def eliminar_usuario_id(id):
     cursor.execute(query)
     conexion.commit()
     conexion.close()
+
+def obenter_usuario_usuario(usuario):
+    query = "select * from usuarios where usuario='{}';".format(usuario)
+    print(query)
+    conexion = conexion_bd()
+    cursor = conexion.cursor()
+    cursor.execute(query)
+    usuario = cursor.fetchone()
+    conexion.commit()
+    conexion.close()
+
+    return usuario

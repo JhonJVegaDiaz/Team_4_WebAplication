@@ -7,6 +7,7 @@
     <title>SLS DUBAI</title>
     <!-- <link rel="stylesheet" href="static/css/bootstrap.css">     -->
     <link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}" />
+    {% block src %} {% endblock %}
 </head>
 <body>
 
@@ -17,4 +18,5 @@
     <script src="static/js/process.js"></script>
     <!-- <script src="static/js/bootstrap.js"></script> -->
     <script src="https://cdn.tailwindcss.com/"></script>
+    {% block script %} {% endblock %}
 </html>

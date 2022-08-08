@@ -1,5 +1,5 @@
 import os
-from flask import Flask, redirect, render_template, request, jsonify
+from flask import Flask, redirect, render_template, request, jsonify, session
 import db.scripts as scripts
 
 
@@ -21,10 +21,19 @@ def inicio():
 @app.route('/user', methods=['GET','POST'])
 def usuario():
     if request.method == 'GET': 
-        return render_template('user.html')
+        category=""
+        return render_template('user.html', category=category)
     else:
         if request.form.get('accion') == 'Ingresar':
-            return redirect('/room')
+            usuario = request.form.to_dict(flat=True)
+            if (usuario["usuario"]):
+                session["user"]= scripts.obenter_usuario_usuario(usuario["usuario"])
+                if (usuario["clave"]):
+                    if session["user"][8] == usuario["clave"]:
+                        return redirect('/room')
+            else:
+                category="error"
+                return render_template('user.html', category=category)
         elif request.form.get('accion') == 'Registrarse':
             return redirect('/user_registrarse')
         elif request.form.get('accion') == 'Recuperar contraseña':
@@ -57,4 +66,3 @@ def login():
         return render_template( 'user.html')
     else: 
          return redirect('/')
-

@@ -2,11 +2,15 @@
 
 function alerta_crear() {
     const usuario = document.getElementById('usuario').value
+    const pregunta = document.getElementById('pregunta').value
+    const respuesta = document.getElementById('respuesta').value
     const contraseña = document.getElementById('pasword').value
     const confirmar_contraseña = document.getElementById('Pasword_confirmacion').value
 
     const registro = {
         usuario,
+        pregunta,
+        respuesta,
         contraseña,
         confirmar_contraseña
     }
@@ -16,8 +20,8 @@ function alerta_crear() {
     
 
     if (!usuario) {texto_modal.textContent = "Escriba un usuario"; abrir_modal.click(); return false }
-    
-
+    if (!pregunta) {texto_modal.textContent = "Escriba una pregunta para recuperar contraseña"; abrir_modal.click(); return false }
+    if (!respuesta) {texto_modal.textContent = "Escriba un respuesta para recuperar contraseña"; abrir_modal.click(); return false }
     if (!contraseña) {texto_modal.textContent = "Escriba una contraseña"; abrir_modal.click(); return false }
     if (!confirmar_contraseña) {texto_modal.textContent = "Confirme la contraseña"; abrir_modal.click(); return false }
 
