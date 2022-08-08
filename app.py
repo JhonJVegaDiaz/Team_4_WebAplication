@@ -51,4 +51,10 @@ def crear():
     scripts.insertar_usuario(usuario)
     return redirect('/user')
 
+@app.route('/login', methods=['GET','POST'])
+def login():
+    if request.method == 'GET': 
+        return render_template( 'user.html')
+    else: 
+         return redirect('/')
 

@@ -1,46 +1,66 @@
-
 {% extends 'base.html' %}
 
 {% block body %}
-        <header>
-            <div class="logo">
-                <img src="static/images/lgo sls.jpeg" alt="">
-        
-            </div>
-
-            <a href="/" >
-              <span class="badge bg-primary">Inicio</span>
-            </a>
-
-        </header>
-
-        <nav>
-          <h4 class="mover">Porcentaje de habitaciones ocupadas</h4>
-          <div class="progress">
-            <div class="progress-bar" role="progressbar" style="width: 15%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-            <div class="progress-bar bg-success" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-            <div class="progress-bar bg-info" role="progressbar" style="width: 20%;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </nav>
-      <div class="Card">
-        <div class="card mb-3">
-          <h4 class="card-header">Estadísticas</h4>
-          <div class="card-body">
-            <h5 class="card-title">Habitaciones disponibles: 87</h5>
-            <h6 class="card-subtitle text-muted">Suites disponibles: 3</h6>
-          </div>
-          <img src="static/images/pra usuario.webp" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
-            <rect width="100%" height="100%" fill="#868e96"></rect>
-            <text x="50%" y="50%" fill="#dee2e6" dy=".3em"></text>
-        </img>
-
-        
-
-        </div>
+<header class="mb-10">
+  <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-900">
+    <div class="container flex flex-wrap justify-between items-center mx-auto">
+      <a class="flex items-center">
+        <img src="static/images/lgo sls.jpeg" class="mr-3 h-24">
+        <span class="self-center text-xl font-semibold whitespace-nowrap text-[#73baaf]">SLS DUBAI</span>
+      </a>
+      <button data-collapse-toggle="navbar-default" type="button"
+        class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+        aria-controls="navbar-default" aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd"
+            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+            clip-rule="evenodd"></path>
+        </svg>
+      </button>
+      <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+        <ul
+          class="flex flex-col p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+          <li>
+            <a href="/"
+              class="block text-lg py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
+              aria-current="page">Home</a>
+          </li>
+          <li>
+            <a href="/user"
+              class="block text-lg py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">ingresar</a>
+          </li>
+        </ul>
       </div>
+    </div>
+  </nav>
+</header>
+<div>
+    <h2 class="text-center text-3xl font-semibold text-gray-500">
+      Porcentaje de habitaciones ocupadas
+    </h2>
+    <div class="flex my-5">
+      <div class="h-6 bg-green-400 w-2/5">
+      </div>
+      <div class="h-6 bg-blue-300 w-2/5">
+      </div>
+      <div class="h-6 bg-gray-400 w-1/5"></div>
+    </div>
+  </div>
+<div class="flex w-56">
+  <div class="flex flex-col border-2">
+    <div class="flex flex-col">
+      <h4 class="text-center font-semibold text-gray-400 text-3xl border-b-2">Estadísticas</h4>
+      <div class="my-3">
+        <h5 class="text-center font-semibold text-gray-400 text-3xl">Habitaciones disponibles: 87</h5>
+        <h6 class="text-center font-semibold text-gray-400 text-xl">Suites disponibles: 3</h6>
+      </div>
+      <div>
+       <img class="h-56" src="static/images/pra usuario.webp"> 
+      </div>
+    </div>
+  </div>
+</div>
 
-      {% block contenido %}
-
-      {% endblock %}
-
-  {% endblock %}
+{% endblock %}

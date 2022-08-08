@@ -5,14 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SLS DUBAI</title>
-    <link rel="stylesheet" href="static/css/bootstrap.css">    
+    <!-- <link rel="stylesheet" href="static/css/bootstrap.css">     -->
+    <link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}" />
 </head>
 <body>
 
     {% block body %}
-
+    
     {% endblock %}
 </body>
     <script src="static/js/process.js"></script>
-    <script src="static/js/bootstrap.js"></script>
+    <!-- <script src="static/js/bootstrap.js"></script> -->
+    <script src="https://cdn.tailwindcss.com/"></script>
 </html>
