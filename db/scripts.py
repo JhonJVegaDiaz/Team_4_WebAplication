@@ -66,7 +66,6 @@ def eliminar_usuario_id(id):
 
 def obenter_usuario_usuario(usuario):
     query = "select * from usuarios where usuario='{}';".format(usuario)
-    print(query)
     conexion = conexion_bd()
     cursor = conexion.cursor()
     cursor.execute(query)

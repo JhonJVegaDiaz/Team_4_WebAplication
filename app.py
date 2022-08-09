@@ -27,10 +27,25 @@ def usuario():
         if request.form.get('accion') == 'Ingresar':
             usuario = request.form.to_dict(flat=True)
             if (usuario["usuario"]):
-                session["user"]= scripts.obenter_usuario_usuario(usuario["usuario"])
-                if (usuario["clave"]):
-                    if session["user"][8] == usuario["clave"]:
-                        return redirect('/room')
+                try:
+                    session["user"]= scripts.obenter_usuario_usuario(usuario["usuario"])
+                    if (usuario["clave"]):
+                        if session["user"][8] == usuario["clave"]:
+                            if session["user"][9] == 1:
+                                return redirect('/super')
+                            else:    
+                                return redirect('/room')
+                        else:
+                            category="error"
+                            return render_template('user.html', category=category)
+
+                    else:
+                        category="error"
+                        return render_template('user.html', category=category)
+                except:
+                    category="error"
+                    return render_template('user.html', category=category)                    
+
             else:
                 category="error"
                 return render_template('user.html', category=category)
@@ -66,3 +81,21 @@ def login():
         return render_template( 'user.html')
     else: 
          return redirect('/')
+
+@app.route('/super', methods=['GET','POST'])
+def super_menu():
+    try:
+        super = session["user"][9]
+        if super == 1:
+            if request.method == 'GET': 
+                
+                    return render_template('super.html', super=super)
+
+            else:
+                if request.form.get('accion') == 'Ingresar':
+                    return redirect('/')  
+        else: 
+            return redirect('/') 
+    except:
+        return redirect('/')           
+

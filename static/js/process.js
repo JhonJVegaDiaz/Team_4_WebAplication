@@ -31,7 +31,5 @@ function alerta_crear() {
 
     if (!contraseña === confirmar_contraseña) { abrir_modal.click(); return false }
 
-    console.log(registro);
-
     return true
 }
