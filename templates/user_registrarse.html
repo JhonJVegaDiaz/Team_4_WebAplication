@@ -2,11 +2,12 @@
 
 {% block src %} 
 <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.css')}}" />
+<link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}" />
 {% endblock %}
 
 {% block body_user %}
 
-<div id="formulario_crear">
+<div id="formulario_crear" class="contenedor">
 
   <h5>Datos nuevo usuario</h5>
 
@@ -20,8 +21,8 @@
       <input class="form-control"type="date" name="fecha_nacimiento" id="fecha_nacimiento" placeholder="Fecha de nacimiento">
       <input class="form-control"type="text" name="pregunta" id="pregunta" placeholder="Pregunta de recuperación">
       <input class="form-control"type="text" name="respuesta" id="respuesta" placeholder="Respuesta">
-      <input class="form-control"type="text" name="pasword" id="pasword" placeholder="Pasword">
-      <input class="form-control"type="text" name="Pasword_confirmacion" id="Pasword_confirmacion" placeholder="Confirmación del pasword">
+      <input class="form-control"type="password" name="pasword" id="pasword" placeholder="Pasword">
+      <input class="form-control"type="password" name="Pasword_confirmacion" id="Pasword_confirmacion" placeholder="Confirmación del pasword">
       <input class="btn btn-dark" type="submit" name="accion" id="btn_crear" value="Crear Usuario">     
   </form>
   

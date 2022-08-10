@@ -1,16 +1,20 @@
 {% extends 'user_main.html' %}
 
+{% block src %} 
+<link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}" />
+{% endblock %}
+
 {% block body_user %}
 
-
+<div class="contenedor">
       <form method="post" class="items-center justify-center flex flex-col">
 
        <div class="b1">
         <input type="submit" class="bg-[#73baaf] text-white px-6 py-1 rounded-lg" name="accion" value="Editar Usuarios" >
         <input type="submit" class="bg-[#73baaf] text-white px-6 py-1 rounded-lg"name="accion" value="Editar Habitaciones">
        </div>
-      </form>  
-
+      </form> 
+</div> 
 
 {% endblock %}
 

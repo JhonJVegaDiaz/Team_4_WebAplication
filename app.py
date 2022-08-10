@@ -1,11 +1,23 @@
 import os
 from flask import Flask, redirect, render_template, request, jsonify, session
 import db.scripts as scripts
-
+from werkzeug.security import generate_password_hash, check_password_hash
+import re 
 
 app = Flask(__name__)
 
 app.secret_key = os.urandom(24)
+
+
+@app.before_request
+def before_request():
+    if 'user' not in session and request.endpoint in ['super_menu']:
+        return redirect('/')
+  
+    elif 'user' not in session and request.endpoint in ['room']:
+        return redirect('/')
+
+
 
 @app.route('/', methods=['GET','POST'])
 def inicio():
@@ -26,19 +38,15 @@ def usuario():
     else:
         if request.form.get('accion') == 'Ingresar':
             usuario = request.form.to_dict(flat=True)
-            if (usuario["usuario"]):
+            if (usuario["usuario"]) and (usuario["clave"]):
                 try:
-                    session["user"]= scripts.obenter_usuario_usuario(usuario["usuario"])
-                    if (usuario["clave"]):
-                        if session["user"][8] == usuario["clave"]:
-                            if session["user"][9] == 1:
-                                return redirect('/super')
-                            else:    
-                                return redirect('/room')
-                        else:
-                            category="error"
-                            return render_template('user.html', category=category)
-
+                    data= scripts.obenter_usuario_usuario(usuario["usuario"])
+                    if check_password_hash(data[8], usuario["clave"]):
+                        session["user"]=data
+                        if session["user"][9] == 1:
+                            return redirect('/super')
+                        else:    
+                             return redirect('/room')
                     else:
                         category="error"
                         return render_template('user.html', category=category)
@@ -71,9 +79,12 @@ def registrarse():
 @app.route('/crear', methods=['POST'])
 def crear():
     usuario = request.form.to_dict(flat=True)
-    usuario.pop("Pasword_confirmacion")
-    scripts.insertar_usuario(usuario)
-    return redirect('/user')
+    valid = validaciones_registro(usuario)
+    if valid:
+        usuario["pasword"]= generate_password_hash(usuario["pasword"])
+        usuario.pop("Pasword_confirmacion")
+        scripts.insertar_usuario(usuario)
+        return redirect('/user')
 
 @app.route('/login', methods=['GET','POST'])
 def login():
@@ -88,9 +99,7 @@ def super_menu():
         super = session["user"][9]
         if super == 1:
             if request.method == 'GET': 
-                
                     return render_template('super.html', super=super)
-
             else:
                 if request.form.get('accion') == 'Ingresar':
                     return redirect('/')  
@@ -99,3 +108,19 @@ def super_menu():
     except:
         return redirect('/')           
 
+def validaciones_registro(registro):
+    user = registro['usuario']
+    password = registro['contrasena']
+    confirm_pass = registro['confirmar_contrasena']
+
+    if not(len(user) > 6):
+        return False
+
+    regEx = re.compile(r'^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$')
+    if not(regEx.match(password)):
+        return False
+
+    if not(password == confirm_pass):
+        return False
+
+    return True

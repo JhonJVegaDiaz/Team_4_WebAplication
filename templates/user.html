@@ -1,15 +1,19 @@
 {% extends 'user_main.html' %}
 
+{% block src %} 
+<link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}" />
+{% endblock %}
+
 {% block body_user %}
 
+  <div class="contenedor">
 
-
-      <form method="post" class="items-center justify-center flex flex-col">
+      <form method="post" class="items-center justify-center flex flex-col" >
       <div class="data_b1 mb-10">
         <label for="">Usuario:</label>
         <input type="text" name="usuario" id="" class="border border-gray-400 rounded-lg mr-5">
         <label for="">Clave:</label>
-        <input type="text" name="clave" id="" class="border border-gray-400 rounded-lg ">
+        <input type="password" name="clave" id="" class="border border-gray-400 rounded-lg ">
       </div>
        <div class="b1">
         <input type="submit" class="bg-[#73baaf] text-white px-6 py-1 rounded-lg" name="accion" value="Ingresar" >
@@ -22,6 +26,8 @@
 
       </form>  
       
+    </div>
+
       <script>
         var category = '{{ category }}';
       </script>
