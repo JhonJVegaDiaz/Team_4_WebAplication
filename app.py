@@ -85,6 +85,8 @@ def crear():
         usuario.pop("Pasword_confirmacion")
         scripts.insertar_usuario(usuario)
         return redirect('/user')
+    else:
+        return redirect('/user_registrarse')
 
 @app.route('/login', methods=['GET','POST'])
 def login():
