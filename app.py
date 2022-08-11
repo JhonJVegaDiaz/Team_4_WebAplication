@@ -30,6 +30,14 @@ def inicio():
             return redirect('/')
 
 
+@app.route('/login', methods=['GET','POST'])
+def login():
+    if request.method == 'GET': 
+        return render_template( 'user.html')
+    else: 
+         return redirect('/')
+
+
 @app.route('/user', methods=['GET','POST'])
 def usuario():
     if request.method == 'GET': 
@@ -88,32 +96,11 @@ def crear():
     else:
         return redirect('/user_registrarse')
 
-@app.route('/login', methods=['GET','POST'])
-def login():
-    if request.method == 'GET': 
-        return render_template( 'user.html')
-    else: 
-         return redirect('/')
-
-@app.route('/super', methods=['GET','POST'])
-def super_menu():
-    try:
-        super = session["user"][9]
-        if super == 1:
-            if request.method == 'GET': 
-                    return render_template('super.html', super=super)
-            else:
-                if request.form.get('accion') == 'Ingresar':
-                    return redirect('/')  
-        else: 
-            return redirect('/') 
-    except:
-        return redirect('/')           
 
 def validaciones_registro(registro):
     user = registro['usuario']
-    password = registro['contrasena']
-    confirm_pass = registro['confirmar_contrasena']
+    password = registro['pasword']
+    confirm_pass = registro['Pasword_confirmacion']
 
     if not(len(user) > 6):
         return False
@@ -126,3 +113,54 @@ def validaciones_registro(registro):
         return False
 
     return True
+
+
+@app.route('/super', methods=['GET','POST'])
+def super_menu():
+    try:
+        super = session["user"][9]
+        if super == 1:
+            if request.method == 'GET': 
+                    return render_template('super.html', super=super)
+            else:
+                if request.form.get('accion') == 'Editar Usuarios':
+                    return redirect('/editUsers')  
+                elif request.form.get('accion') == 'Editar Habitaciones':
+                    return redirect('/editRoom') 
+                else:
+                    return redirect('/super')  
+        else: 
+            return redirect('/') 
+    except:
+        return redirect('/') 
+
+
+@app.route('/editUsers', methods=['GET','POST'])
+def super_editar_usuarios():
+    try:
+        super = session["user"][9]
+        if super == 1:
+            if request.method == 'GET':    
+                    usuarios = scripts.obenter_usuario_tabla()
+                    return render_template('editUsers.html', usuarios=usuarios)
+            else:
+                return redirect('/super')  
+        else: 
+            return redirect('/') 
+    except:
+        return redirect('/')
+
+@app.route('/editRoom', methods=['GET','POST'])
+def super_editar_habitaciones():
+    try:
+        super = session["user"][9]
+        if super == 1:
+            if request.method == 'GET': 
+                    return ("Edición de habitaciones")
+            else:
+                return redirect('/super')  
+        else: 
+            return redirect('/') 
+    except:
+        return redirect('/')                         
+
