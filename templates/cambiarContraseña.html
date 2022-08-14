@@ -7,15 +7,16 @@
 
 {% block body_user %}
 
-<div class="contenedor flex flex-col">
-    <h3 class="center">Cambiar Contraseña</h3>
+<div class="contenedor">
+    <div class="flex flex-col" id="cambiarContraseña">
+        <h3 class="center">Cambiar Contraseña</h3>
 
-    <form action="" method="post" onsubmit="return validar_pass()" >
         <input type="password" class="form-control" name="contrasena" id="nueva_contrasena" placeholder="Nueva contraseña">
         <input type="password" class="form-control" name="confirmar_contrasena" id="nueva_confirmar_contrasena" placeholder="Confirmar nueva contraseña">
 
-        <input type="submit" class="btn btn-success form-control" value="Cambiar" id="btn_nueva_contrasena">
-    </form>
+        <input type="submit" class="bg-[#303387] btn btn-success form-control" value="Cambiar" id="btn_nueva_contrasena">
+
+    </div>
 </div>
 
 

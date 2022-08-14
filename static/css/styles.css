@@ -85,7 +85,7 @@ header {
   }
 
 
-  #formulario_crear {
+  #formulario_crear, #cambiarContraseña{
     width: 50%;
     margin-left: auto;
     margin-right: auto;

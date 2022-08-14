@@ -1,10 +1,10 @@
 from email.mime.text import MIMEText
 from smtplib import SMTP
 
-def correo():
+def correo(correo, mensaje):
  from_address = "mintic2022.grupo4@gmail.com"
- to_address = "mintic2022.grupo4@gmail.com"
- message = "Mensaje enviado desde python"
+ to_address = correo
+ message = "Mensaje enviado desde python " + mensaje
  mime_message = MIMEText(message)
  mime_message["From"] = from_address
  mime_message["To"] = to_address

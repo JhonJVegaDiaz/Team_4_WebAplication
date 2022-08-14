@@ -45,7 +45,7 @@ if (btn_crear){
 
     if (!/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/i.test(pasword)) {texto_modal.textContent = "La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula, al menos una mayúscula y al menos un caracter no alfanumérico."; abrir_modal.click(); return false }
 
-    if (!pasword === Pasword_confirmacion) { abrir_modal.click(); return false }
+    if (!(pasword === Pasword_confirmacion)) { texto_modal.textContent = 'Las contraseñas no son iguales'; abrir_modal.click(); return false }
 
     
 
@@ -185,22 +185,32 @@ if (btn_recuperar) {
 }
 
 if (btn_nueva_contrasena) {
+ 
     btn_nueva_contrasena.addEventListener('click', () => {
-        console.log('holaaaaaaa');
-    })
+
+        const contraseña = document.getElementById('nueva_contrasena').value
+        const confirmar_contraseña = document.getElementById('nueva_confirmar_contrasena').value
+        const abrir_modal = document.getElementById('abrir_modal')
+        const texto_modal = document.getElementById('modal-body')
+
+        if (!contraseña) {texto_modal.textContent = "Escriba una contraseña"; abrir_modal.click(); return false }
+        if (!confirmar_contraseña) {texto_modal.textContent = "Confirme la contraseña"; abrir_modal.click(); return false }
+        if (!/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/i.test(contraseña)) {texto_modal.textContent = "La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula, al menos una mayúscula y al menos un caracter no alfanumérico."; abrir_modal.click(); return false }
     
-}
+        if (!(contraseña === confirmar_contraseña)) { texto_modal.textContent = 'Las contraseñas no son iguales'; abrir_modal.click(); return false }
 
-function validar_pass() {
-    const contraseña = document.getElementById('nueva_contrasena').value
-    const confirmar_contraseña = document.getElementById('nueva_confirmar_contrasena').value
+        const url = window.location.href
+        const registro= {contraseña}
 
-    if (!contraseña) return setear_modal(abrir_modal, 'El campo contraseña se encuentra vacío')
-    if (!confirmar_contraseña) return setear_modal(abrir_modal, 'El campo confirmar contraseña se encuentra vacío')
+          fetch(url, {
+            method: "POST", 
+            body: JSON.stringify(registro), 
+            headers:{
+              'Content-Type': 'application/json'
+            }
+          }).then(res => window.location.href = "/")
+          .catch(error => console.error('Error:', error))
+          .then(response => console.log('Success:', response));
 
-    if (!/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/i.test(contraseña)) return setear_modal(abrir_modal, 'La contraseña debe tener minimo 6 caracteres, una mayuscula, una minuscula y un caracter especial')
-
-    if (!(contraseña === confirmar_contraseña)) return setear_modal(abrir_modal, 'Las contraseñas no son iguales')
-
-    return true
+    } )  
 }

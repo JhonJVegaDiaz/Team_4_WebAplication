@@ -73,6 +73,16 @@ def obenter_usuario_usuario(usuario):
     conexion.close()
     return usuario
 
+def obenter_usuario_correo(correo):
+    query = "select * from usuarios where correo='{}';".format(correo)
+    conexion = conexion_bd()
+    cursor = conexion.cursor()
+    cursor.execute(query)
+    usuario = cursor.fetchone()
+    conexion.commit()
+    conexion.close()
+    return usuario
+
 def obenter_recuperacion_clave(hash):
     query = "select * from recuperacion where clave='{}';".format(hash)
     conexion = conexion_bd()
@@ -83,8 +93,18 @@ def obenter_recuperacion_clave(hash):
     conexion.close()
     return link
 
-def editar_usuario_usuario(usuario, nueva_pass):
-    query = "update usuarios set pasword = '{}' where usuario = '{}';".format(nueva_pass, usuario)
+def obenter_recuperacion_id(id):
+    query = "select * from recuperacion where id_usuario={};".format(id)
+    conexion = conexion_bd()
+    cursor = conexion.cursor()
+    cursor.execute(query)
+    link = cursor.fetchone()
+    conexion.commit()
+    conexion.close()
+    return link
+
+def editar_usuario_contraseña(id, nueva_pass):
+    query = "update usuarios set pasword = '{}' where id = {};".format(nueva_pass, id)
     conexion = conexion_bd()
     cursor = conexion.cursor()
     cursor.execute(query)
@@ -93,6 +113,14 @@ def editar_usuario_usuario(usuario, nueva_pass):
 
 def eliminar_recuperacion_clave(hash):
     query = "delete from recuperacion where clave='{}'".format(hash)
+    conexion = conexion_bd()
+    cursor = conexion.cursor()
+    cursor.execute(query)
+    conexion.commit()
+    conexion.close()
+
+def insertar_hash(id, correo ,hash):
+    query = "insert into recuperacion (id_usuario, correo, clave) values ({},'{}','{}');".format(id, correo ,hash)
     conexion = conexion_bd()
     cursor = conexion.cursor()
     cursor.execute(query)

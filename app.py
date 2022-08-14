@@ -5,6 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import re 
 import json
 import uuid
+import mensaje
 
 
 app = Flask(__name__)
@@ -205,12 +206,16 @@ def formroom():
 
 @app.route('/recuperar', methods=['POST'])
 def recuperar():
-    admin = json.loads(request.data.decode("utf-8"))
-    admin_bd = scripts.obenter_admin_user(admin)
+    correo = json.loads(request.data.decode("utf-8"))
+    usuario = scripts.obenter_usuario_correo(correo["correo"])
+    recuperacion = scripts.obenter_recuperacion_id(usuario[0])
+    if recuperacion:
+        scripts.eliminar_recuperacion_clave(recuperacion[3])
 
-    if admin_bd:
+    if usuario:
         hash = uuid.uuid4().hex
-        scripts.insertar_hash(admin['usuario'], hash)
+        scripts.insertar_hash(usuario[0], correo["correo"], hash)
+        mensaje.correo(correo["correo"], hash)
         return jsonify({'mensaje': hash})
     
     return jsonify({'mensaje': 'error'})
@@ -223,11 +228,11 @@ def crear_nueva_contrasena(hash):
         if request.method == 'GET':
             return render_template('cambiarContraseña.html')
         else:
-            nueva_pass = request.form.to_dict(flat=True)
-            usuario = link[1]
-            nueva_pass['contrasena'] = generate_password_hash(nueva_pass['contrasena'])
+            nueva_pass = json.loads(request.data.decode("utf-8"))
+            id = link[1]
+            nueva_pass['contrasena'] = generate_password_hash(nueva_pass['contraseña'])
 
-            scripts.editar_usuario_usuario(usuario, nueva_pass['contrasena'])
+            scripts.editar_usuario_contraseña(id, nueva_pass['contrasena'])
             scripts.eliminar_recuperacion_clave(hash)
 
             return redirect('/')
