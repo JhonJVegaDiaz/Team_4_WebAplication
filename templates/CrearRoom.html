@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <!-- component -->
+    <div class="">
+        <div class="relative min-h-screen flex flex-col sm:justify-center items-center bg-[#453246]">
+            <div class="relative sm:max-w-sm w-full">
+                <div class="card bg-[#f7bc02] shadow-lg  w-full h-full rounded-3xl absolute  transform -rotate-6"></div>
+                <div class="card bg-[#f37f32] shadow-lg  w-full h-full rounded-3xl absolute  transform rotate-6"></div>
+                <div class="relative w-full rounded-3xl  px-6 py-4 bg-gray-100 shadow-md">
+                    <label for="" class="block mt-3 text-lg text-gray-700 text-center font-semibold">
+                        Registro de Habitacion
+                    </label>
+                    <form method="#" action="#" class="mt-10">
+                        <div>
+                            <select class="mt-1 block w-full border bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-[#f7bc02] focus:bg-[#f37f32] focus:ring-0 font-semibold">
+                                <option selected hidden>Selecciona el tipo de Habitacion</option>
+                                <option class="text-white font-bold bg-[#453246]">Luxury</option>
+                                <option class="text-white font-bold bg-[#453246]">Premium</option>
+                                <option class="text-white font-bold bg-[#453246]">Suite</option>
+                              </select>
+                        </div>
+
+                        <div class="mt-7">
+                            <input type="text" placeholder="Precio"
+                                class="px-2 mt-1 block w-full border bg-gray-100 h-11 rounded-xl shadow-lg focus:ring-0">
+                        </div>
+                        <div class="mt-7">
+                            <button
+                                class="bg-[#453246] w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
+                                Registrar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

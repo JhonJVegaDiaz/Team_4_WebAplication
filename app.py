@@ -164,3 +164,17 @@ def super_editar_habitaciones():
     except:
         return redirect('/')                         
 
+@app.route('/Create_room', methods = ['GET', 'POST'])
+def super_crear_habitaciones():
+    if request.method == 'GET':
+
+        return render_template('Create_room.html')
+    else:
+        return render_template('/') 
+
+@app.route('/CrearRoom', methods=['GET','POST'])
+def formroom():
+    if request.method == 'GET': 
+        return render_template('CrearRoom.html')
+    else:
+        return redirect('/')

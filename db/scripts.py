@@ -9,12 +9,11 @@ def conexion_bd():
         print('Error de conexion bd')
 
 def insertar_usuario(usuario):
-    query = "insert into usuarios (usuario, nombre, apellido, correo, celular, direccion, fecha, pasword, super, pregunta, respuesta) values ('{}','{}','{}','{}','{}','{}','{}','{}', 0,'{}','{}');".format(usuario['usuario'],
+    query = "insert into usuarios (usuario, nombre, apellido, correo, celular, direccion, fecha, pasword, super) values ('{}','{}','{}','{}','{}','{}','{}','{}', 0);".format(usuario['usuario'],
                                                 usuario['nombre'], 
                                                 usuario['apellido'], usuario['correo'], 
                                                 usuario['celular'], usuario['direccion'],
-                                                usuario['fecha_nacimiento'], usuario['pasword'],
-                                                usuario['pregunta'], usuario['respuesta'])
+                                                usuario['fecha_nacimiento'], usuario['pasword'])
 
     conexion = conexion_bd()
     cursor = conexion.cursor()

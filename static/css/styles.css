@@ -35,14 +35,7 @@ header {
     height: 150px;
   }
   
-  body .com, body form .b0 {
-    display: inline-block;
-  }
-  
-  body form .b0{
-    margin-left: 50%;
-  }
-  
+
   body .room1 img {
     width: 350px;
     height: 250px;
@@ -68,26 +61,13 @@ header {
   margin-left: 30%;  
   }
   
-  .b1{
-  margin-top: 5%;
-  margin-left: 40%;
+  .b1, .b2{
+  margin-bottom: 2%;
+  margin-left: auto;
+  margin-right: auto;
   }
   
-  .b2{
-    margin-top: -15%;
-    margin-left: 40%;
-    }
-  .Card{
-    height: 200px;
-    width: 200px;
-    line-height: 100px;
-    text-align: center;
-    vertical-align: middle;
-  }
   
-  .mover{
-    margin-left: 20%;
-  }
   
   .po1{
     display: inline-block;
@@ -103,12 +83,11 @@ header {
     display: inline-block;
      margin-left: 20%;
   }
-  
-  
-  
+
+
   #formulario_crear {
     width: 50%;
-    margin-left: auto;
+    margin-left: 20%;
     margin-right: auto;
   }
   
@@ -116,15 +95,29 @@ header {
     margin-top: 5px;
   }
   
-  
-  #btn_crear , #cancelar_usuario {
-    margin-top: 5px;
-  }
-  
   #btn_crear {
     float: right;
   }
+
+  #cancelar_usuario {
+    margin-top: -20px;
+  }
   
+  .lado {
+    width: 20%;
+  }
+
   .lado, .contenedor{
     display: inline-block;
+  }
+
+  .contenedor{
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #entrada_clave{  
+    margin-left: auto;
+    margin-right: auto;
   }

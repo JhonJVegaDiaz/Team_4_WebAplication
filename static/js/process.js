@@ -1,6 +1,9 @@
+const btn_crear = document.document.getElementById('btn_crear')
 
+if (btn_crear){
+    btn_editar_usuario.addEventListener('click', () => {
 
-function alerta_crear() {
+    console.log("entro")
     const usuario = document.getElementById('usuario').value
     const pregunta = document.getElementById('pregunta').value
     const respuesta = document.getElementById('respuesta').value
@@ -32,4 +35,5 @@ function alerta_crear() {
     if (!contraseña === confirmar_contraseña) { abrir_modal.click(); return false }
 
     return true
+}
 }
