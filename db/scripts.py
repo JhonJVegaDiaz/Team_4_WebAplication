@@ -22,7 +22,7 @@ def insertar_usuario(usuario):
     conexion.close()
 
 def obenter_usuario_tabla():
-    query = "select id, nombre, correo, fecha from usuarios;"
+    query = "select id, usuario, nombre, correo, super from usuarios;"
     conexion = conexion_bd()
     cursor = conexion.cursor()
     cursor.execute(query)
@@ -44,10 +44,10 @@ def obenter_usuario_id(id):
     return usuario
 
 def editar_usuario_id(id, usuario):
-    query = "update usuarios set usuario = '{}', nombre = '{}', apellido = '{}', correo = '{}', celular = '{}', direccion = '{}', fecha = '{}' where id = {};".format(usuario['cedula'], usuario['nombre'], 
+    query = "update usuarios set usuario = '{}', nombre = '{}', apellido = '{}', correo = '{}', celular = '{}', direccion = '{}', fecha = '{}', super = {} where id = {};".format(usuario['usuario'], usuario['nombre'], 
                                                 usuario['apellido'], usuario['correo'], 
                                                 usuario['celular'], usuario['direccion'],
-                                                usuario['fecha_nacimiento'], id)
+                                                usuario['fecha_nacimiento'], usuario['clase'], id)
 
     conexion = conexion_bd()
     cursor = conexion.cursor()

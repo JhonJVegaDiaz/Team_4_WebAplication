@@ -1,31 +1,34 @@
 {% extends 'user_main.html' %}
 
 {% block src %} 
-<link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.css')}}" />
 <link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}" />
+<link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.css')}}" />
 {% endblock %}
 
 {% block body_user %}
 
-<div class="contenedor">
-      <table class="table table-striped table-hover" id="lista_usuario">
+<div class="contenedor flex flex-col">
+  <div class="flex flex-col" id="lista_usuario">
+      <table class="table table-striped table-hover" >
             <tr>
               <th>#</th>
               <th>ID</th>
-              <th>Correo</th>
+              <th>Usuario</th>
               <th>Nombre</th>
-              <th>Fecha de nacimiento</th>
+              <th>Correo</th>
+              <th>Categoria</th>
               <th>Acciones</th>
             </tr>
         
             {% for index in range(usuarios|length) %}
         
             <tr>
-                <td>{{ index }}</td>
+                <td>{{ index +1}}</td>
                 <td>{{ usuarios[index][0] }}</td>
-                <td>{{ usuarios[index][2] }}</td>
                 <td>{{ usuarios[index][1] }}</td>
+                <td>{{ usuarios[index][2] }}</td>
                 <td>{{ usuarios[index][3] }}</td>
+                <td>{{ usuarios[index][4] }}</td>
                 <td>
                   <a href="/ver/{{usuarios[index][0]}}" class="btn btn-secondary">Ver</a>
                   <a href="/editar/{{usuarios[index][0]}}" class="btn btn-warning">Editar</a>
@@ -39,7 +42,31 @@
         
             
           </table>
+    </div>
 </div> 
+
+
+<button data-bs-toggle="modal" data-bs-target="#exampleModal" id="abrir_modal" hidden>
+  Abrir Modal
+</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Error</h5>
+        <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close" id="cerrar_modal"></button>
+      </div>
+      <div class="modal-body" id="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary  bg-[#26B15F] " data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary bg-[#F3152F]" id="confirmar_modal">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 {% endblock %}
 

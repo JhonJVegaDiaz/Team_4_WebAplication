@@ -7,8 +7,8 @@
 
 {% block body_user %}
 
-<div class="contenedor flex flex-col" >
-  <div id="formulario_crear ">
+<div class="contenedor" >
+  <div id="formulario_crear" class="flex flex-col">
 
     <h5>Datos nuevo usuario</h5>
         <input class="form-control" type="text" name="usuario" id="usuario" placeholder="Usuario">
@@ -24,6 +24,27 @@
         <button class="bg-[#F3152F] text-white px-6 py-1 rounded-lg" id="cancelar_usuario" onclick="location.href='/user'" >Cancelar</button>   
   </div>   
 </div> 
+
+
+<button data-bs-toggle="modal" data-bs-target="#exampleModal" id="abrir_modal" hidden>
+  Abrir Modal
+</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Error</h5>
+        <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close" id="cerrar_modal"></button>
+      </div>
+      <div class="modal-body" id="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary bg-[#F3152F]" data-bs-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
        

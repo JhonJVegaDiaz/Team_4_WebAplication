@@ -1,0 +1,30 @@
+{% extends 'user_main.html' %}
+
+{% block src %} 
+<link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}" />
+<link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.css')}}" />
+{% endblock %}
+
+{% block body_user %}
+
+<div class="contenedor">
+    <div id="formulario_crear" class="flex flex-col">
+    <button class="btn btn-light float-end" id="cerrar_sesion">Cerrar Sesion</button>
+
+    <h3>Detalles del usuario: {{ usuario[2] }} {{ usuario[3] }}</h3>
+
+    <input class="form-control" type="text" name="usuario" id="usuario" readonly="readonly" value="{{usuario[1]}}" >
+    <input class="form-control" type="text" name="nombre" id="nombre" readonly="readonly" value="{{usuario[2]}}" >
+    <input class="form-control" type="text" name="apellido" id="apellido" readonly="readonly" value="{{usuario[3]}}" >
+    <input class="form-control" type="email" name="correo" id="correo" readonly="readonly" value={{usuario[4]}} >
+    <input class="form-control" type="number" name="celular" id="celular" readonly="readonly" value={{usuario[5]}} >
+    <input class="form-control" type="text" name="direccion" id="direccion" readonly="readonly" value="{{usuario[6]}}" >
+    <input class="form-control" type="date" name="fecha_nacimiento" id="fecha_nacimiento" readonly="readonly" value={{usuario[7]}} >
+    <input class="form-control" type="number" name="Clase" id="clase" readonly="readonly" value={{usuario[9]}}>
+    <button class="bg-[#F3152F] text-white px-6 py-1 rounded-lg" id="cancelar_usuario" onclick="location.href='/editUsers'" >Atras</button> 
+    </div> 
+</div>
+
+
+       
+{% endblock %}

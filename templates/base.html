@@ -15,8 +15,9 @@
     
     {% endblock %}
 </body>
-    <script src="static/js/process.js"></script>
-    <script src="static/js/bootstrap.js"></script>
+
+    <script src={{ url_for('static', filename='js/process.js') }}></script>
+    <script src={{ url_for('static', filename='js/bootstrap.js') }}></script>
     <script src="https://cdn.tailwindcss.com/"></script>
     {% block script %} {% endblock %}
 </html>

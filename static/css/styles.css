@@ -87,7 +87,7 @@ header {
 
   #formulario_crear {
     width: 50%;
-    margin-left: 20%;
+    margin-left: auto;
     margin-right: auto;
   }
   
@@ -95,13 +95,16 @@ header {
     margin-top: 5px;
   }
   
+
+  #cancelar_usuario, #btn_crear {
+    margin-top: 5px;
+    display: inline-block;
+  }
+
   #btn_crear {
     float: right;
   }
 
-  #cancelar_usuario {
-    margin-top: -20px;
-  }
   
   .lado {
     width: 20%;
@@ -118,6 +121,13 @@ header {
   }
 
   #entrada_clave{  
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #lista_usuario {
+    margin-top: -45%;
+    width: 90%;
     margin-left: auto;
     margin-right: auto;
   }

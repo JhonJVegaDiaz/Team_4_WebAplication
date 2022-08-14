@@ -6,7 +6,7 @@
   <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-900">
     <div class="container flex flex-wrap justify-between items-center mx-auto">
       <a class="flex items-center">
-        <img src="static/images/lgo sls.jpeg" class="mr-3 h-24">
+        <img src={{ url_for('static', filename='images/lgo sls.jpeg') }} class="mr-3 h-24">
         <span class="self-center text-xl font-semibold whitespace-nowrap text-[#73baaf]">SLS DUBAI</span>
       </a>
       <button data-collapse-toggle="navbar-default" type="button"
@@ -58,8 +58,8 @@
           <h5 class="text-center font-semibold text-gray-400 text-3xl">Habitaciones disponibles: 87</h5>
           <h6 class="text-center font-semibold text-gray-400 text-xl">Suites disponibles: 3</h6>
         </div>
-        <div>
-        <img class="h-56" src="static/images/pra usuario.webp"> 
+        <div>          
+        <img class="h-56" src={{ url_for('static', filename='images/pra usuario.webp') }}> 
         </div>
       </div>
 </div>

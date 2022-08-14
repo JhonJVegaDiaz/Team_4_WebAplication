@@ -3,6 +3,9 @@ from flask import Flask, redirect, render_template, request, jsonify, session
 import db.scripts as scripts
 from werkzeug.security import generate_password_hash, check_password_hash
 import re 
+import json
+
+
 
 app = Flask(__name__)
 
@@ -86,7 +89,7 @@ def registrarse():
 
 @app.route('/crear', methods=['POST'])
 def crear():
-    usuario = request.form.to_dict(flat=True)
+    usuario = json.loads(request.data.decode("utf-8"))
     valid = validaciones_registro(usuario)
     if valid:
         usuario["pasword"]= generate_password_hash(usuario["pasword"])
@@ -149,6 +152,27 @@ def super_editar_usuarios():
             return redirect('/') 
     except:
         return redirect('/')
+
+@app.route('/ver/<int:id>')
+def ver(id):
+    usuario = scripts.obenter_usuario_id(id)
+    return render_template('ver.html', usuario=usuario)
+
+@app.route('/editar/<int:id>', methods=['GET','PUT'])
+def editar(id):
+    if request.method == 'GET':
+        usuario = scripts.obenter_usuario_id(id)
+        return render_template('editar.html', usuario=usuario)
+    else:
+        usuario = json.loads(request.data.decode("utf-8"))
+        print("PUT")
+        scripts.editar_usuario_id(id, usuario)
+        return '/editUsers'        
+
+@app.route('/eliminar/<int:id>')
+def eliminar(id):
+    scripts.eliminar_usuario_id(id)
+    return redirect('/editUsers')
 
 @app.route('/editRoom', methods=['GET','POST'])
 def super_editar_habitaciones():

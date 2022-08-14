@@ -1,0 +1,51 @@
+{% extends 'user_main.html' %}
+
+{% block src %} 
+<link rel="stylesheet" href={{ url_for('static', filename='css/styles.css') }} />
+<link rel="stylesheet" href={{ url_for('static', filename='css/bootstrap.css') }} />
+{% endblock %}
+
+{% block body_user %}
+
+<div class="contenedor">
+    <div id="formulario_crear" class="flex flex-col">
+    <button class="btn btn-light float-end" id="cerrar_sesion">Cerrar Sesion</button>
+
+    <h3>Detalles del usuario: {{ usuario[2] }} {{ usuario[3] }}</h3>
+
+    <input class="form-control" type="text" name="usuario" id="usuario" placeholder="Usuario" value="{{usuario[1]}}" >
+    <input class="form-control" type="text" name="nombre" id="nombre" placeholder="nombre" value="{{usuario[2]}}" >
+    <input class="form-control" type="text" name="apellido" id="apellido" placeholder="apellido" value="{{usuario[3]}}" >
+    <input class="form-control" type="email" name="correo" id="correo" placeholder="correo" value="{{usuario[4]}}" >
+    <input class="form-control" type="number" name="celular" id="celular" placeholder="celular" value={{usuario[5]}} >
+    <input class="form-control" type="text" name="direccion" id="direccion" placeholder="direccion" value="{{usuario[6]}}" >
+    <input class="form-control" type="date" name="fecha_nacimiento" id="fecha_nacimiento" placeholder="fecha_nacimiento" value={{usuario[7]}} >
+    <input class="form-control" type="number" name="Clase" id="clase" placeholder="clase" value={{usuario[9]}}>
+    <button class="bg-[#303387] btn btn-success" type="submit" id="btn_editar">Editar Usuario</button>
+    <button class="bg-[#F3152F] text-white px-6 py-1 rounded-lg" id="cancelar_usuario" onclick="location.href='/editUsers'" >Atras</button> 
+    </div> 
+</div>
+
+
+<button data-bs-toggle="modal" data-bs-target="#exampleModal" id="abrir_modal" hidden>
+    Abrir Modal
+  </button>
+  
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Error</h5>
+          <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close" id="cerrar_modal"></button>
+        </div>
+        <div class="modal-body" id="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary bg-[#F3152F]" data-bs-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+{% endblock %}
