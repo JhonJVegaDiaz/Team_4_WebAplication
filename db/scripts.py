@@ -1,9 +1,10 @@
 from cmath import log
 import sqlite3
+import os
 
 def conexion_bd():
     try:
-        conexion = sqlite3.connect('db/basedatos.sqlite')
+        conexion = sqlite3.connect(os.path.dirname(os.path.abspath(__file__))+'/basedatos.sqlite')
         return conexion
     except:
         print('Error de conexion bd')
@@ -40,7 +41,6 @@ def obenter_usuario_id(id):
     usuario = cursor.fetchone()
     conexion.commit()
     conexion.close()
-
     return usuario
 
 def editar_usuario_id(id, usuario):
@@ -71,5 +71,30 @@ def obenter_usuario_usuario(usuario):
     usuario = cursor.fetchone()
     conexion.commit()
     conexion.close()
-
     return usuario
+
+def obenter_recuperacion_clave(hash):
+    query = "select * from recuperacion where clave='{}';".format(hash)
+    conexion = conexion_bd()
+    cursor = conexion.cursor()
+    cursor.execute(query)
+    link = cursor.fetchone()
+    conexion.commit()
+    conexion.close()
+    return link
+
+def editar_usuario_usuario(usuario, nueva_pass):
+    query = "update usuarios set pasword = '{}' where usuario = '{}';".format(nueva_pass, usuario)
+    conexion = conexion_bd()
+    cursor = conexion.cursor()
+    cursor.execute(query)
+    conexion.commit()
+    conexion.close()
+
+def eliminar_recuperacion_clave(hash):
+    query = "delete from recuperacion where clave='{}'".format(hash)
+    conexion = conexion_bd()
+    cursor = conexion.cursor()
+    cursor.execute(query)
+    conexion.commit()
+    conexion.close()

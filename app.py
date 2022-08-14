@@ -4,7 +4,7 @@ import db.scripts as scripts
 from werkzeug.security import generate_password_hash, check_password_hash
 import re 
 import json
-
+import uuid
 
 
 app = Flask(__name__)
@@ -202,3 +202,39 @@ def formroom():
         return render_template('CrearRoom.html')
     else:
         return redirect('/')
+
+@app.route('/recuperar', methods=['POST'])
+def recuperar():
+    admin = json.loads(request.data.decode("utf-8"))
+    admin_bd = scripts.obenter_admin_user(admin)
+
+    if admin_bd:
+        hash = uuid.uuid4().hex
+        scripts.insertar_hash(admin['usuario'], hash)
+        return jsonify({'mensaje': hash})
+    
+    return jsonify({'mensaje': 'error'})
+
+
+@app.route('/crear_nueva_contrasena/<string:hash>', methods=['GET', 'POST'])
+def crear_nueva_contrasena(hash):
+    link = scripts.obenter_recuperacion_clave(hash)
+    if link:
+        if request.method == 'GET':
+            return render_template('cambiarContraseña.html')
+        else:
+            nueva_pass = request.form.to_dict(flat=True)
+            usuario = link[1]
+            nueva_pass['contrasena'] = generate_password_hash(nueva_pass['contrasena'])
+
+            scripts.editar_usuario_usuario(usuario, nueva_pass['contrasena'])
+            scripts.eliminar_recuperacion_clave(hash)
+
+            return redirect('/')
+    else:
+        return 'Hash invalido'
+
+@app.route('/cerrar')
+def cerrar_sesion():
+    session.pop('usuario', None)
+    return redirect('/')

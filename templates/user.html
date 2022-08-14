@@ -7,14 +7,14 @@
 
 {% block body_user %}
 
-  <div class="contenedor">
+  <div class="contenedor" id="login" >
 
       <form method="post" class="items-center justify-center flex flex-col" >
       <div class="data_b1 mb-10" id="entrada_clave">
         <label for="">Usuario:</label>
-        <input type="text" name="usuario" id="" class="form-control">
+        <input type="text" name="usuario" class="form-control">
         <label for="">Clave:</label>
-        <input type="password" name="clave" id="" class="form-control">
+        <input type="password" name="clave" class="form-control">
       </div>
        <div class="b1">
         <input type="submit" class="bg-[#73baaf] text-white px-6 py-1 rounded-lg" name="accion" value="Ingresar" >
@@ -22,7 +22,7 @@
        </div>
 
        <div class="b2">
-        <input type="submit" class="bg-[#73baaf] text-white px-6 py-1 rounded-lg"name="accion" value="Recuperar contraseña">
+        <input class="bg-[#73baaf] text-white px-6 py-1 rounded-lg" value="Recuperar contraseña" data-bs-toggle="modal" data-bs-target="#exampleModal">
        </div>
 
       </form>  
@@ -48,6 +48,26 @@
                         </script>
                     {% endif %}
 
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Recuperar contraseña</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="cerrar_modal"></button>
+      </div>
+      <div class="modal-body" id="modal-body">
+          <input class="form-control" type="email" placeholder="Correo" name="correo_recp" id="correo_recp">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary bg-[#F3152F]" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary bg-[#303387]" id="confirmar_recuperacion">Recuperar</button>
+      </div>
+    </div>
+  </div>
+</div>                    
        
 {% endblock %}
 

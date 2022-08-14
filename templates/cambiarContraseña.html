@@ -1,0 +1,44 @@
+{% extends 'user_main.html' %}
+
+{% block src %} 
+<link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}" />
+<link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.css')}}" />
+{% endblock %}
+
+{% block body_user %}
+
+<div class="contenedor flex flex-col">
+    <h3 class="center">Cambiar Contraseña</h3>
+
+    <form action="" method="post" onsubmit="return validar_pass()" >
+        <input type="password" class="form-control" name="contrasena" id="nueva_contrasena" placeholder="Nueva contraseña">
+        <input type="password" class="form-control" name="confirmar_contrasena" id="nueva_confirmar_contrasena" placeholder="Confirmar nueva contraseña">
+
+        <input type="submit" class="btn btn-success form-control" value="Cambiar" id="btn_nueva_contrasena">
+    </form>
+</div>
+
+
+<button data-bs-toggle="modal" data-bs-target="#exampleModal" id="abrir_modal" hidden>
+  Abrir Modal
+</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Error</h5>
+        <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close" id="cerrar_modal"></button>
+      </div>
+      <div class="modal-body" id="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary bg-[#F3152F]" data-bs-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+       
+{% endblock %}
