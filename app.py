@@ -215,7 +215,7 @@ def recuperar():
     if usuario:
         hash = uuid.uuid4().hex
         scripts.insertar_hash(usuario[0], correo["correo"], hash)
-        mensaje.correo(correo["correo"], hash)
+        mensaje.correo(correo["correo"], request.url_root +'crear_nueva_contrasena/'+hash)
         return jsonify({'mensaje': hash})
     
     return jsonify({'mensaje': 'error'})

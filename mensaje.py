@@ -4,11 +4,11 @@ from smtplib import SMTP
 def correo(correo, mensaje):
  from_address = "mintic2022.grupo4@gmail.com"
  to_address = correo
- message = "Mensaje enviado desde python " + mensaje
+ message = "Para recuperar la contraseña seguir este enlace: " + mensaje
  mime_message = MIMEText(message)
  mime_message["From"] = from_address
  mime_message["To"] = to_address
- mime_message["Subject"] = "Correo de prueba"
+ mime_message["Subject"] = "Correo recuperación contraseña"
  smtp = SMTP("smtp.gmail.com", 587)
  smtp.ehlo()
  smtp.starttls()
