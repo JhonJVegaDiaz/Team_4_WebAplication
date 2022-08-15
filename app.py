@@ -103,11 +103,17 @@ def crear():
 
 @app.route('/crearHabitacion', methods=['POST'])
 def crearHabitacion():
-    habitacion = json.loads(request.data.decode("utf-8"))
-    scripts.insertar_habitacion(habitacion)
-    print (habitacion)
-    return redirect('/Create_room')
-
+    try:
+        super = session["user"][9]
+        if super == 1:    
+            habitacion = json.loads(request.data.decode("utf-8"))
+            scripts.insertar_habitacion(habitacion)
+            print (habitacion)
+            return redirect('/Create_room')
+        else: 
+            return redirect('/') 
+    except:
+        return redirect('/') 
 
 def validaciones_registro(registro):
     user = registro['usuario']
@@ -131,7 +137,7 @@ def validaciones_registro(registro):
 def super_menu():
     try:
         super = session["user"][9]
-        if super == 1:
+        if (super == 1) or (super == 2):
             if request.method == 'GET': 
                     return render_template('super.html', super=super)
             else:
@@ -151,7 +157,7 @@ def super_menu():
 def super_editar_usuarios():
     try:
         super = session["user"][9]
-        if super == 1:
+        if (super == 1) or (super == 2):
             if request.method == 'GET':    
                     usuarios = scripts.obenter_usuario_tabla()
                     return render_template('editUsers.html', usuarios=usuarios)
@@ -164,35 +170,65 @@ def super_editar_usuarios():
 
 @app.route('/ver/<int:id>')
 def ver(id):
-    usuario = scripts.obenter_usuario_id(id)
-    return render_template('ver.html', usuario=usuario)
+    try:
+        super = session["user"][9]
+        if (super == 1) or (super == 2):    
+            usuario = scripts.obenter_usuario_id(id)
+            return render_template('ver.html', usuario=usuario)
+        else: 
+            return redirect('/') 
+    except:
+        return redirect('/')
 
 @app.route('/editar/<int:id>', methods=['GET','PUT'])
 def editar(id):
-    if request.method == 'GET':
-        usuario = scripts.obenter_usuario_id(id)
-        return render_template('editar.html', usuario=usuario)
-    else:
-        usuario = json.loads(request.data.decode("utf-8"))
-        print("PUT")
-        scripts.editar_usuario_id(id, usuario)
-        return '/editUsers'        
+    try:
+        super = session["user"][9]
+        if super == 1:       
+            if request.method == 'GET':
+                usuario = scripts.obenter_usuario_id(id)
+                return render_template('editar.html', usuario=usuario)
+            else:
+                usuario = json.loads(request.data.decode("utf-8"))
+                print("PUT")
+                scripts.editar_usuario_id(id, usuario)
+                return '/editUsers'
+        elif super == 2:
+            return '/editUsers'
+        else: 
+            return redirect('/') 
+    except:
+        return redirect('/')         
 
 @app.route('/eliminar/<int:id>')
 def eliminar(id):
-    scripts.eliminar_usuario_id(id)
-    return redirect('/editUsers')
+    try:
+        super = session["user"][9]
+        if super == 1:      
+            scripts.eliminar_usuario_id(id)
+            return redirect('/editUsers')
+        else: 
+            return redirect('/') 
+    except:
+        return redirect('/') 
 
 @app.route('/eliminarRoom/<int:id>')
 def eliminar_habitacion(id):
-    scripts.eliminar_habitacion_id(id)
-    return redirect('/Create_room')
+    try:
+        super = session["user"][9]
+        if (super == 1) or (super == 2):    
+            scripts.eliminar_habitacion_id(id)
+            return redirect('/Create_room')
+        else: 
+            return redirect('/') 
+    except:
+        return redirect('/') 
 
 @app.route('/editRoom', methods=['GET','POST'])
 def super_editar_habitaciones():
     try:
         super = session["user"][9]
-        if super == 1:
+        if (super == 1) or (super == 2):
             if request.method == 'GET': 
                     return redirect('/Create_room')
             else:
@@ -204,18 +240,32 @@ def super_editar_habitaciones():
 
 @app.route('/Create_room', methods = ['GET', 'POST'])
 def super_crear_habitaciones():
-    if request.method == 'GET':
-        rooms = scripts.obtener_habitaciones_tabla()
-        return render_template('Create_room.html',rooms=rooms)
-    else:
-        return render_template('/') 
+    try:
+        super = session["user"][9]
+        if (super == 1) or (super == 2):    
+            if request.method == 'GET':
+                rooms = scripts.obtener_habitaciones_tabla()
+                return render_template('Create_room.html',rooms=rooms)
+            else:
+                return render_template('/')
+        else: 
+            return redirect('/') 
+    except:
+        return redirect('/')      
 
 @app.route('/CrearRoom', methods=['GET','POST'])
 def formroom():
-    if request.method == 'GET': 
-        return render_template('CrearRoom.html')
-    else:
-        return redirect('/')
+    try:
+        super = session["user"][9]
+        if super == 1:       
+            if request.method == 'GET': 
+                return render_template('CrearRoom.html')
+            else:
+                return redirect('/')
+        else: 
+            return redirect('/') 
+    except:
+        return redirect('/')  
 
 @app.route('/recuperar', methods=['POST'])
 def recuperar():
@@ -256,3 +306,27 @@ def crear_nueva_contrasena(hash):
 def cerrar_sesion():
     session.pop('usuario', None)
     return redirect('/')
+
+@app.route('/validar_usuario', methods=['PUT'])
+def validar_usuario():
+    usuario = json.loads(request.data.decode("utf-8"))
+    try:
+        session=scripts.obenter_usuario_usuario(usuario["usuario"])
+        if (session):
+            return jsonify({'mensaje': True})
+        else:
+            return jsonify({'mensaje': False})
+    except:
+        return jsonify({'mensaje': False})
+
+@app.route('/validar_correo', methods=['PUT'])
+def validar_correo():
+    usuario = json.loads(request.data.decode("utf-8"))
+    try:
+        session=scripts.obenter_usuario_correo(usuario["correo"])
+        if (session):
+            return jsonify({'mensaje': True})
+        else:
+            return jsonify({'mensaje': False})
+    except:
+        return jsonify({'mensaje': False})

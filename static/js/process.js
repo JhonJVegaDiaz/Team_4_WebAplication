@@ -5,6 +5,8 @@ const btn_eliminar_habitacion = document.querySelectorAll('.eliminar_habitacion'
 const btn_recuperar = document.getElementById('confirmar_recuperacion')
 const btn_nueva_contrasena = document.getElementById('btn_nueva_contrasena')
 const btn_crear_room = document.getElementById('register_room')
+const campo_usuario= document.getElementById("usuario")
+const campo_correo= document.getElementById("correo")
 
 if (btn_crear_room) {
     btn_crear_room.addEventListener('click', (e) => {
@@ -69,12 +71,44 @@ if (btn_crear) {
         if (!pasword) { texto_modal.textContent = "Escriba una contraseña"; abrir_modal.click(); return false }
         if (!Pasword_confirmacion) { texto_modal.textContent = "Confirme la contraseña"; abrir_modal.click(); return false }
 
-
+        if (!/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i.test(correo)){ texto_modal.textContent = "Escribir un correo válido"; abrir_modal.click(); return false }
 
         if (!/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/i.test(pasword)) { texto_modal.textContent = "La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula, al menos una mayúscula y al menos un caracter no alfanumérico."; abrir_modal.click(); return false }
 
         if (!(pasword === Pasword_confirmacion)) { texto_modal.textContent = 'Las contraseñas no son iguales'; abrir_modal.click(); return false }
 
+        if (usuario.length >= 6) {
+            const registro1 = { usuario }
+            fetch('/validar_usuario', {
+                method: 'PUT',
+                body: JSON.stringify(registro1),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            
+            }).then(function (response) {
+                return response.json();
+            }).then(function (text) {
+             if (text.mensaje){
+                texto_modal.textContent = "Usuario repetido, cambiar usuario"; abrir_modal.click(); return false
+                }})                        
+        }
+
+        if (correo) {
+            const registro2 = { correo }
+            fetch('/validar_correo', {
+                method: 'PUT',
+                body: JSON.stringify(registro2),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            
+            }).then(function (response) {
+                return response.json();
+            }).then(function (text) {
+             if (text.mensaje){
+                texto_modal.textContent = "El correo ya está inscrito, cambiar correo"; abrir_modal.click(); return false
+                }})}
 
 
         fetch('/crear', {
@@ -249,7 +283,6 @@ if (btn_nueva_contrasena) {
         if (!contraseña) { texto_modal.textContent = "Escriba una contraseña"; abrir_modal.click(); return false }
         if (!confirmar_contraseña) { texto_modal.textContent = "Confirme la contraseña"; abrir_modal.click(); return false }
         if (!/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/i.test(contraseña)) { texto_modal.textContent = "La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula, al menos una mayúscula y al menos un caracter no alfanumérico."; abrir_modal.click(); return false }
-
         if (!(contraseña === confirmar_contraseña)) { texto_modal.textContent = 'Las contraseñas no son iguales'; abrir_modal.click(); return false }
 
         const url = window.location.href
@@ -266,4 +299,63 @@ if (btn_nueva_contrasena) {
             .then(response => console.log('Success:', response));
 
     })
+}
+
+if (campo_usuario){
+    campo_usuario.addEventListener('change', () => {
+
+        const abrir_modal = document.getElementById('abrir_modal')
+        const texto_modal = document.getElementById('modal-body')
+        const usuario = campo_usuario.value
+
+        if (usuario.length > 6) {
+            const contenedor = document.getElementById('registrar')
+            const registro = { usuario }
+            fetch('/validar_usuario', {
+                method: 'PUT',
+                body: JSON.stringify(registro),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            
+            }).then(function (response) {
+                return response.json();
+            }).then(function (text) {
+             if (text.mensaje){
+                texto_modal.textContent = "Usuario repetido, cambiar usuario"; abrir_modal.click()
+                }}).catch(error => console.error('Error:', error))
+                .then(response => console.log('Success:', response));
+        
+        }
+    } )
+
+}
+
+if (campo_correo){
+    campo_correo.addEventListener('change', () => {
+
+        const abrir_modal = document.getElementById('abrir_modal')
+        const texto_modal = document.getElementById('modal-body')
+        const correo = campo_correo.value
+
+        if (/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i.test(correo)) {
+            const registro = { correo }
+            fetch('/validar_correo', {
+                method: 'PUT',
+                body: JSON.stringify(registro),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            
+            }).then(function (response) {
+                return response.json();
+            }).then(function (text) {
+             if (text.mensaje){
+                texto_modal.textContent = "El correo ya está inscrito, cambiar correo"; abrir_modal.click()
+                }}).catch(error => console.error('Error:', error))
+                .then(response => console.log('Success:', response));
+        
+        }
+    } )
+
 }

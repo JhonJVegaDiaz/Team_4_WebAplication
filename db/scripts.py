@@ -99,6 +99,7 @@ def obenter_usuario_usuario(usuario):
     conexion.commit()
     conexion.close()
     return usuario
+    
 
 def obenter_usuario_correo(correo):
     query = "select * from usuarios where correo='{}';".format(correo)
