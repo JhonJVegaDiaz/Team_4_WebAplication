@@ -40,20 +40,29 @@
         </thead>
     
         <tbody class="divide-y divide-gray-100">
+          {% for index in range(rooms|length) %}
           <tr>
             </td>
             <td class="p-4 font-medium text-gray-900 whitespace-nowrap">
-              1
+              {{rooms[index][0]}}
             </td>
-            <td class="p-4 text-gray-700 whitespace-nowrap">Luxury</td>
+            <td class="p-4 text-gray-700 whitespace-nowrap">{{rooms[index][1]}}</td>
             <td class="p-4 text-gray-700 whitespace-nowrap">
+              {% if rooms[index][3]=="Reservada"%}
+                <strong
+                  class="bg-red-100 text-red-700 px-3 py-1.5 rounded text-xs font-medium"
+                >
+                  {{rooms[index][3]}}
+                </strong>
+              {% else %}
               <strong
-                class="bg-red-100 text-red-700 px-3 py-1.5 rounded text-xs font-medium"
-              >
-                Cancelled
-              </strong>
+                  class="bg-green-100 text-green-700 px-3 py-1.5 rounded text-xs font-medium"
+                >
+                  {{rooms[index][3]}}
+                </strong>
+              {% endif %}
             </td>
-            <td class="p-4 text-gray-700 whitespace-nowrap">450650</td>
+            <td class="p-4 text-gray-700 whitespace-nowrap">{{rooms[index][2]}}</td>
             <td class="p-4 text-gray-700 whitespace-nowrap">
               <button class="bg-transparent hover:bg-yellow-500 text-yellow-400 font-semibold hover:text-black py-2 px-4 border border-yellow-500 hover:border-transparent rounded">
                 Editar
@@ -63,8 +72,8 @@
               </button>
             </td>
           </tr>
-    
-          <tr>
+          {% endfor %}
+          <!-- <tr>
             <td class="p-4 font-medium whitespace-nowrap">2</td>
             <td class="p-4 text-gray-700 whitespace-nowrap">Premium</td>
             <td class="p-4 whitespace-nowrap">
@@ -106,7 +115,7 @@
                 Eliminar
               </button>
             </td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
     </div>

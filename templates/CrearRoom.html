@@ -11,9 +11,9 @@
                     <label for="" class="block mt-3 text-lg text-gray-700 text-center font-semibold">
                         Registro de Habitacion
                     </label>
-                    <form method="#" action="#" class="mt-10">
+                    <form class="mt-10">
                         <div>
-                            <select class="mt-1 block w-full border bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-[#f7bc02] focus:bg-[#f37f32] focus:ring-0 font-semibold">
+                            <select id="tipo" class="mt-1 block w-full border bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-[#f7bc02] focus:bg-[#f37f32] focus:ring-0 font-semibold">
                                 <option selected hidden>Selecciona el tipo de Habitacion</option>
                                 <option class="text-white font-bold bg-[#453246]">Luxury</option>
                                 <option class="text-white font-bold bg-[#453246]">Premium</option>
@@ -22,11 +22,18 @@
                         </div>
 
                         <div class="mt-7">
-                            <input type="text" placeholder="Precio"
+                            <input id="precio" type="text" placeholder="Precio"
                                 class="px-2 mt-1 block w-full border bg-gray-100 h-11 rounded-xl shadow-lg focus:ring-0">
                         </div>
                         <div class="mt-7">
-                            <button
+                            <select id="estado" class="mt-1 block w-full border bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-[#f7bc02] focus:bg-[#f37f32] focus:ring-0 font-semibold">
+                                <option selected hidden>Selecciona el estado de la Habitacion</option>
+                                <option class="text-white font-bold bg-[#453246]">Libre</option>
+                                <option class="text-white font-bold bg-[#453246]">Reservada</option>
+                              </select>
+                        </div>
+                        <div class="mt-7">
+                            <button id="register_room"
                                 class="bg-[#453246] w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
                                 Registrar
                             </button>

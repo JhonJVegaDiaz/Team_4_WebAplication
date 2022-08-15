@@ -22,6 +22,16 @@ def insertar_usuario(usuario):
     conexion.commit()
     conexion.close()
 
+def insertar_habitacion(rooms):
+        query ="insert into rooms (tipo, precio, estatus) values ('{}','{}','{}');".format(rooms['tipo'],
+        rooms['precio'],rooms['estado']
+         )
+        conexion = conexion_bd()
+        cursor = conexion.cursor()
+        cursor.execute(query)
+        conexion.commit()
+        conexion.close()
+
 def obenter_usuario_tabla():
     query = "select id, usuario, nombre, correo, super from usuarios;"
     conexion = conexion_bd()
@@ -30,8 +40,17 @@ def obenter_usuario_tabla():
     usuarios = cursor.fetchall()
     conexion.commit()
     conexion.close()
-
     return usuarios
+
+def obtener_habitaciones_tabla():
+    query = "select numero, tipo, precio, estatus from rooms;"
+    conexion = conexion_bd()
+    cursor = conexion.cursor()
+    cursor.execute(query)
+    habitaciones = cursor.fetchall()
+    conexion.commit()
+    conexion.close()
+    return habitaciones
 
 def obenter_usuario_id(id):
     query = "select * from usuarios where id={};".format(id)

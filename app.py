@@ -1,3 +1,4 @@
+#from crypt import methods
 import os
 from flask import Flask, redirect, render_template, request, jsonify, session
 import db.scripts as scripts
@@ -100,6 +101,13 @@ def crear():
     else:
         return redirect('/user_registrarse')
 
+@app.route('/crearHabitacion', methods=['POST'])
+def crearHabitacion():
+    habitacion = json.loads(request.data.decode("utf-8"))
+    scripts.insertar_habitacion(habitacion)
+    print (habitacion)
+    return redirect('/Create_room')
+
 
 def validaciones_registro(registro):
     user = registro['usuario']
@@ -192,8 +200,8 @@ def super_editar_habitaciones():
 @app.route('/Create_room', methods = ['GET', 'POST'])
 def super_crear_habitaciones():
     if request.method == 'GET':
-
-        return render_template('Create_room.html')
+        rooms = scripts.obtener_habitaciones_tabla()
+        return render_template('Create_room.html',rooms=rooms)
     else:
         return render_template('/') 
 
