@@ -183,13 +183,18 @@ def eliminar(id):
     scripts.eliminar_usuario_id(id)
     return redirect('/editUsers')
 
+@app.route('/eliminarRoom/<int:id>')
+def eliminar_habitacion(id):
+    scripts.eliminar_habitacion_id(id)
+    return redirect('/Create_room')
+
 @app.route('/editRoom', methods=['GET','POST'])
 def super_editar_habitaciones():
     try:
         super = session["user"][9]
         if super == 1:
             if request.method == 'GET': 
-                    return ("Edición de habitaciones")
+                    return redirect('/Create_room')
             else:
                 return redirect('/super')  
         else: 

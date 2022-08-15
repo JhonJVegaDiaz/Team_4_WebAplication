@@ -1,6 +1,7 @@
 const btn_crear = document.getElementById('btn_crear')
 const btn_editar = document.getElementById('btn_editar')
 const btn_eliminar_usuario = document.querySelectorAll('.eliminar_usuario')
+const btn_eliminar_habitacion = document.querySelectorAll('.eliminar_habitacion')
 const btn_recuperar = document.getElementById('confirmar_recuperacion')
 const btn_nueva_contrasena = document.getElementById('btn_nueva_contrasena')
 const btn_crear_room = document.getElementById('register_room')
@@ -156,6 +157,31 @@ if (btn_eliminar_usuario) {
 
             btn_confirmar_modal.addEventListener('click', () => {
                 window.location.href = `/eliminar/${id_usuario}`
+            })
+
+
+        })
+    });
+
+}
+
+
+if (btn_eliminar_habitacion) {
+
+    btn_eliminar_habitacion.forEach(btn_eliminar => {
+        btn_eliminar.addEventListener('click', () => {
+            id_usuario = btn_eliminar.getAttribute('id')
+
+            const abrir_modal = document.getElementById('abrir_modal')
+            const texto_modal = document.getElementById('modal-body')
+
+            texto_modal.textContent = `Está seguro de eliminar la habitación id:${id_usuario}`
+            abrir_modal.click()
+
+            const btn_confirmar_modal = document.getElementById('confirmar_modal')
+
+            btn_confirmar_modal.addEventListener('click', () => {
+                window.location.href = `/eliminarRoom/${id_usuario}`
             })
 
 

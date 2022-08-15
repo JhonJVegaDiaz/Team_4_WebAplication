@@ -105,6 +105,10 @@ header {
     float: right;
   }
 
+  #tablaCuartos, #regresarCuartos {
+    display: block; 
+  }
+
   
   .lado {
     width: 20%;

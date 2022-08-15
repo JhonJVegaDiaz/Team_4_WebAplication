@@ -74,6 +74,14 @@ def editar_usuario_id(id, usuario):
     conexion.commit()
     conexion.close()
 
+def eliminar_habitacion_id(id):
+    query = "delete from rooms where numero={}".format(id)
+    conexion = conexion_bd()
+    cursor = conexion.cursor()
+    cursor.execute(query)
+    conexion.commit()
+    conexion.close()
+
 def eliminar_usuario_id(id):
     query = "delete from usuarios where id={}".format(id)
     conexion = conexion_bd()
